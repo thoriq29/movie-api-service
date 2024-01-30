@@ -1,0 +1,105 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Configurations>Debug;Release;Sandbox;Staging;Development;Testing;Review</Configurations>
+		<RootNamespace>Movie.Common</RootNamespace>
+		<AssemblyName>Movie.Common</AssemblyName>
+		<LangVersion>9.0</LangVersion>
+		<UserSecretsId>7808262a-963c-4dec-b9a0-91ed1ebbde57</UserSecretsId>
+		<Version>$(VersionPrefix)1.0.0</Version>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<SonarQubeTestProject>false</SonarQubeTestProject>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<OutputPath>..\..\bin\Debug\Movie.Common</OutputPath>
+		<NoWarn>1701;1702;1591</NoWarn>
+		<DefineConstants>DEBUG;TRACE</DefineConstants>
+		<DocumentationFile>..\..\bin\Debug\Movie.Common\Movie.Common.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<OutputPath>..\..\bin\Release\Movie.Common\</OutputPath>
+		<DefineConstants>TRACE;RELEASE</DefineConstants>
+		<DocumentationFile>..\..\bin\Release\Movie.Common\Movie.Common.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Sandbox|AnyCPU'">
+		<OutputPath>..\..\bin\Sandbox\Movie.Common\</OutputPath>
+		<DefineConstants>TRACE;SANDBOX</DefineConstants>
+		<DocumentationFile>..\..\bin\Sandbox\Movie.Common\Movie.Common.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Staging|AnyCPU'">
+		<OutputPath>..\..\bin\Staging\Movie.Common\</OutputPath>
+		<DefineConstants>TRACE;STAGING</DefineConstants>
+		<Optimize>true</Optimize>
+		<DocumentationFile>..\..\bin\Staging\Movie.Common\Movie.Common.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Development|AnyCPU'">
+		<OutputPath>..\..\bin\Development\Movie.Common\</OutputPath>
+		<DefineConstants>TRACE;DEVELOPMENT</DefineConstants>
+		<DocumentationFile>..\..\bin\Development\Movie.Common\Movie.Common.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Testing|AnyCPU'">
+		<DefineConstants>TRACE;TESTING</DefineConstants>
+		<OutputPath>..\..\bin\Testing\Movie.Common\</OutputPath>
+		<DocumentationFile>..\..\bin\Testing\Movie.Common\Movie.Common.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Utils\**" />
+	  <EmbeddedResource Remove="Utils\**" />
+	  <None Remove="Utils\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.12" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.3">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+
+		<!-- core -->
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+		<PackageReference Include="Fody" Version="6.8.0">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="MethodTimer.Fody" Version="3.2.2" PrivateAssets="All" />
+		<PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="7.0.2" />
+		<PackageReference Include="Google.Cloud.Kms.V1" Version="2.8.0" />
+		<PackageReference Include="IdentityServer4.AccessTokenValidation" Version="3.0.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+		<PackageReference Include="Microsoft.Extensions.DependencyModel" Version="8.0.0" />
+		<PackageReference Include="Sentry.AspNetCore" Version="3.22.0" />
+		<PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
+		<PackageReference Include="Sentry.Serilog" Version="3.22.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+		<PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="6.2.1" />
+		<PackageReference Include="Google.Cloud.SecretManager.V1" Version="1.7.0" />
+
+		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.3" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.3" /> 
+		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
+
+		<PackageReference Include="Serilog" Version="2.12.0" />
+
+		<PackageReference Include="IdentityModel" Version="4.2.0" />
+		<PackageReference Include="Polly" Version="7.2.4" />
+		<PackageReference Include="Polly.Contrib.WaitAndRetry" Version="1.1.1" />
+		<PackageReference Include="Refit" Version="7.0.0" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.26.0" />
+	</ItemGroup>
+
+	<ProjectExtensions>
+		<VisualStudio>
+			<UserProperties appsettings_1common_1json__JsonSchema="{" />
+		</VisualStudio>
+	</ProjectExtensions>
+
+</Project>
