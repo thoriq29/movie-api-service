@@ -45,7 +45,7 @@ namespace Movie.Api.Services.Query.Movie
             try
             {
                 var movie = await _movieService.Find(movieId);
-                if (movie == null)
+                if (movie == null || movie.IsDeleted())
                 {
                     return _serviceResultTemplate.NotFound<MovieDto>("Movie not found");
                 }

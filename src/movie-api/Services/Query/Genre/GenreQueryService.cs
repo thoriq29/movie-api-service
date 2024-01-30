@@ -46,13 +46,6 @@ namespace Movie.Api.Services.Query.Genre
         {
             try
             {
-                var cacheData = await _movieCachingService.GetListGenreDto();
-                if (cacheData != null)
-                {
-                    var data = cacheData.Find(it => it.ID == genreId);
-                    return _serviceResultTemplate.SuccessWithData(data);
-                }
-
                 var genre = await _genreService.Find(genreId);
                 if (genre == null)
                 {
@@ -66,6 +59,7 @@ namespace Movie.Api.Services.Query.Genre
                 var moviesDto = _mapper.Map<List<MovieDto>>(movies);
 
                 genre.Movies = movies;
+                genre.ID = genre.ID;
                 return _serviceResultTemplate.SuccessWithData(genreDto);
             }
             catch (Exception ex)

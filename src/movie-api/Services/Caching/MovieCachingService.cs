@@ -108,5 +108,25 @@ namespace Movie.Api.Services.Caching
                 throw;
             }
         }
+
+        public async Task<bool> DeleteCache()
+        {
+            
+            try
+            {
+                await _cachingService.DeleteCacheData(movieListCacheName, false);
+                await _cachingService.DeleteCacheData(genreListCacheName, false);
+                return false;
+            }
+            catch(Exception e)
+            {
+                _logger.LogWarning(new Error()
+                {
+                    code = "-",
+                    message = e.Message,
+                }, "Error delete cache list");
+                throw;
+            }
+        }
     }
 }

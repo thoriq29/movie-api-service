@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using FluentValidation;
 using Movie.Api.Dto.Genre;
+using Movie.Api.Services.Caching;
 using Movie.Api.Services.Command.Genre;
 using Movie.Api.Utils;
 using Movie.Common.Models.Genre;
@@ -22,6 +23,7 @@ namespace Movie.Api.Services.Command.Genre
         private readonly IValidator<GenrePutRequestDto> _genrePutRequestValidator;
         private readonly IGenreService _genreService;
         private readonly IMapper _mapper;
+        private readonly IMovieCachingService _movieCachingService;
 
         public GenreCommandService(
             ICoreLogger logger,
@@ -30,7 +32,8 @@ namespace Movie.Api.Services.Command.Genre
             IValidator<GenrePostRequestDto> genrePostRequestDtoValidator,
             IValidator<GenrePutRequestDto> genrePutRequestDtoValidator,
             IGenreService genreService,
-            IMapper mapper
+            IMapper mapper,
+            IMovieCachingService movieCachingService
         )
         {
             _logger = logger;
@@ -40,6 +43,7 @@ namespace Movie.Api.Services.Command.Genre
             _genrePutRequestValidator = genrePutRequestDtoValidator;
             _genreService = genreService;
             _mapper = mapper;
+            _movieCachingService = movieCachingService;
         }
 
         public async Task<IServiceApiResult<string>> CreateGenre(GenrePostRequestDto dto)
@@ -69,6 +73,8 @@ namespace Movie.Api.Services.Command.Genre
                 // save genre data
                 var genreModel = _mapper.Map<GenrePostRequestDto, GenreModel>(dto);
                 await _genreService.Add(genreModel);
+
+                await _movieCachingService.DeleteCache();
                 return _serviceResultTemplate.Success<string>();
 
             }
@@ -114,6 +120,7 @@ namespace Movie.Api.Services.Command.Genre
                 }
 
                 await _genreService.Update(genreData);
+                await _movieCachingService.DeleteCache();
                 return _serviceResultTemplate.Success<string>();
 
             }

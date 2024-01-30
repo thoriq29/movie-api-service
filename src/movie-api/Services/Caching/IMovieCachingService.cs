@@ -13,5 +13,7 @@ namespace Movie.Api.Services.Caching
 
         public Task<List<MovieDto>> GetListMovieDto();
         public Task<bool> SetMovieListToCache(List<MovieDto> data);
+
+        public Task<bool> DeleteCache();
     }
 }

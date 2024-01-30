@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using FluentValidation;
 using Movie.Api.Dto.Movie;
+using Movie.Api.Services.Caching;
 using Movie.Api.Services.Command.Movie;
 using Movie.Api.Utils;
 using Movie.Common.Models.Movie;
@@ -23,6 +24,7 @@ namespace Movie.Api.Services.Command.Movie
         private readonly IValidator<MoviePutRequestDto> _moviePutRequestDtoValidator;
         private readonly IMovieService _movieService;
         private readonly IGenreService _genreService;
+        private readonly IMovieCachingService _movieCachingService;
         private readonly IMapper _mapper;
 
         public MovieCommandService(
@@ -33,7 +35,8 @@ namespace Movie.Api.Services.Command.Movie
             IValidator<MoviePutRequestDto> moviePutRequestDtoValidator,
             IMovieService movieService,
             IGenreService genreService,
-            IMapper mapper
+            IMapper mapper,
+            IMovieCachingService movieCachingService
         )
         {
             _logger = logger;
@@ -44,6 +47,7 @@ namespace Movie.Api.Services.Command.Movie
             _movieService = movieService;
             _genreService = genreService;
             _mapper = mapper;
+            _movieCachingService = movieCachingService;
         }
 
         public async Task<IServiceApiResult<string>> CreateMovie(MoviePostRequestDto dto)
@@ -76,6 +80,7 @@ namespace Movie.Api.Services.Command.Movie
                 // Map DTO to movie model and create the movie
                 var movieModel = _mapper.Map<MoviePostRequestDto, MovieModel>(dto);
                 await _movieService.Add(movieModel);
+                await _movieCachingService.DeleteCache();
                 return _serviceResultTemplate.Success();
             }
             catch(Exception e)
@@ -104,6 +109,7 @@ namespace Movie.Api.Services.Command.Movie
 
                 movieData.DeletedDate = DateTime.Now;
                 await _movieService.Update(movieData);
+                await _movieCachingService.DeleteCache();
                return _serviceResultTemplate.Success();
             }
             catch(Exception e)
@@ -174,6 +180,7 @@ namespace Movie.Api.Services.Command.Movie
                 }
 
                 await _movieService.Update(movieData);
+                await _movieCachingService.DeleteCache();
                 return _serviceResultTemplate.Success();
             }
             catch(Exception e)
