@@ -83,40 +83,7 @@ Ada beberapa cara untuk mengatur user secrets.
         - Kemudian Simpanlah
 
 Berikut adalah nilai appSetting yang perlu disimpan di user secret manager
-
-```json
-
-{
-
-    "ConnectionStrings": {
-
-        "DbPassword": "password kamu",
-    },
-
-    "RabbitMqServer": {
-
-        "HostName": "localhost",
-
-        "UserName": "guest",
-
-        "Password": "guest",
-
-        "Port": 5672
-
-    },
-
-    "Authority": {
-
-        "ClientId": "mp.583e5ddbf33c46f5ab1dfaafv9132435",
-
-        "ClientSecret": "mp.635c3ha9u9623cevbca57790e3ba7c34",
-
-        "ClientScope": "server"
-
-    }
-
-}
-
+## saya kirimkan via text jawaban ya
 
 
 ## List API
