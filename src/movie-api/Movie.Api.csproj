@@ -1,0 +1,103 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+	<TargetFramework>net6.0</TargetFramework>
+	<Configurations>Debug;Release;Sandbox;Staging;Development;Testing;Review</Configurations>
+	<RootNamespace>Movie.Api</RootNamespace>
+	<AssemblyName>Movie.Api</AssemblyName>
+	<StartupObject>Movie.Api.Program</StartupObject>
+	<UserSecretsId>7808262a-963c-4dec-b9a0-91ed1ebbde57</UserSecretsId>
+	<Version>$(VersionPrefix)1.0.0</Version>
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	  <SonarQubeTestProject>false</SonarQubeTestProject>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	<OutputPath>..\..\bin\Debug\Api\</OutputPath>
+	<DocumentationFile>..\..\bin\Debug\Api\net6.0\Movie.Api.xml</DocumentationFile>
+	<NoWarn>1701;1702;1591</NoWarn>
+	<DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	<OutputPath>..\..\bin\Release\Api\</OutputPath>
+	<DocumentationFile>..\..\bin\Release\Api\net6.0\Movie.Api.xml</DocumentationFile>
+	<DefineConstants>TRACE;RELEASE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Sandbox|AnyCPU'">
+	<OutputPath>..\..\bin\Sandbox\Api\</OutputPath>
+	<DocumentationFile>..\..\bin\Sandbox\Api\net6.0\Movie.Api.xml</DocumentationFile>
+	<DefineConstants>TRACE;SANDBOX</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Staging|AnyCPU'">
+	<OutputPath>..\..\bin\Staging\Api\</OutputPath>
+	<DocumentationFile>..\..\bin\Staging\Api\net6.0\Movie.Api.xml</DocumentationFile>
+	<DefineConstants>TRACE;STAGING</DefineConstants>
+	<Optimize>true</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Development|AnyCPU'">
+	<OutputPath>..\..\bin\Development\Api\</OutputPath>
+	<DocumentationFile>..\..\bin\Development\Api\net6.0\Movie.Api.xml</DocumentationFile>
+	<DefineConstants>TRACE;DEVELOPMENT</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Testing|AnyCPU'">
+	<DefineConstants>TRACE;TESTING</DefineConstants>
+	<DocumentationFile>..\..\bin\Testing\Api\net6.0\Movie.Api.xml</DocumentationFile>
+	<OutputPath>..\..\bin\Testing\Api\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Review|AnyCPU'">
+	<OutputPath>..\..\bin\Review\Api\</OutputPath>
+	<DocumentationFile>..\..\bin\Review\Api\net6.0\Movie.Api.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'API-Services' " />
+  <ItemGroup>
+	  <None Remove="Logs/**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.7.1" />
+    <PackageReference Include="Fody" Version="6.8.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="MethodTimer.Fody" Version="3.2.2" />
+  </ItemGroup>
+	
+  <ItemGroup>
+	<Content Update="appsettings.Staging.json">
+	  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	</Content>
+	<Content Update="appsettings.Testing.json">
+	  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	</Content>
+  </ItemGroup>
+
+	<ItemGroup>
+		<None Update="secrets.json.keyname" CopyToOutputDirectory="PreserveNewest" />
+		<None Update="secrets.Debug.json.keyname" CopyToOutputDirectory="PreserveNewest" />
+		<None Update="secrets.Development.json.keyname" CopyToOutputDirectory="PreserveNewest" />
+		<None Update="secrets.Sandbox.json.keyname" CopyToOutputDirectory="PreserveNewest" />
+		<None Update="secrets.Staging.json.keyname" CopyToOutputDirectory="PreserveNewest" />
+		<None Update="secrets.Testing.json.keyname" CopyToOutputDirectory="PreserveNewest" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Enums\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.12" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\movie-common\src\movie-service-common\Movie.Common.csproj" />
+	</ItemGroup>
+	<ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
+	
+</Project>

@@ -1,0 +1,24 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:50993/",
+      "sslPort": 0
+    }
+  },
+  "profiles": {
+    "API-Services": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "applicationUrl": "http://localhost:51001/",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "GOOGLE_APPLICATION_CREDENTIALS": "C:\\agate-jupiter1mythic-repo-app-sa-non-prod.json",
+        "PROJECT_ID": "agate-jupiter1",
+        "SECRET_NAME": "achievement-service-development"
+      }
+    }
+  }
+}
